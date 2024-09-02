@@ -12,3 +12,4 @@ streamlit_echarts
 ffmpeg
 nltk
 tqdm
+cryptography
