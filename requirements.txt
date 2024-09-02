@@ -11,3 +11,4 @@ pydub
 streamlit_echarts
 ffmpeg
 nltk
+tqdm
