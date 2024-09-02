@@ -10,11 +10,11 @@ from streamlit_echarts import st_echarts
 st.set_page_config(page_title="LSDAI - Your personal AI Speech and Debate Coach")
 
 documentation = """
-#### Overview
+## Overview
 
 The LSDAI serves as the main entry point for a Streamlit application designed to perform advanced audio analysis tasks, including emphasis detection, tone analysis, and speech speed evaluation. This application leverages multiple Python modules and files to deliver a comprehensive analysis of audio files.
 
-#### Dependencies
+## Dependencies
 
 The application requires several Python libraries and external modules, which should be installed before running the app:
 
@@ -27,7 +27,7 @@ The application requires several Python libraries and external modules, which sh
 - `speed.py`: Provides functionality for calculating and analyzing the speed of speech.
 - `api_key.txt`: A text file containing the necessary API keys for accessing external services [oai_citation:1,api_key.txt](file-service://file-5E4uxQPy7XwCOPpBqKHWbJpl).
 
-#### Key Features
+## Key Features
 
 - **Audio File Upload**: Users can upload audio files of various formats. The app processes these files and conducts multiple forms of analysis.
   
@@ -43,7 +43,7 @@ The application requires several Python libraries and external modules, which sh
   
 - **Persistent Data**: Data and analysis results are saved and can be revisited or updated as needed. This includes maintaining previous analysis for each user.
 
-#### Usage
+## Usage
 
 1. **Running the App**: To run the app, use the Streamlit command:
    ```bash
@@ -64,7 +64,7 @@ The application requires several Python libraries and external modules, which sh
 
 - **Error Handling**: Basic error handling is implemented, but users should ensure that the audio files are properly formatted and that all dependencies are installed correctly.
 
-#### Future Enhancements
+## Future Enhancements
 
 - **Improved GUI**: Plans to enhance the graphical interface, including animations and dynamic updates, are under consideration.
   
