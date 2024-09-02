@@ -63,7 +63,8 @@ def get_api_key(file_path):
     except Exception as e:
         raise e
 
-openai.api_key = get_api_key('api_key.encrypted')
+import streamlit as st
+openai.api_key = st.secrets["openai"]["api_key"]
 
 def analyze_sentiment(text):
     sid = SentimentIntensityAnalyzer()

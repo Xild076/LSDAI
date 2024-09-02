@@ -1,6 +1,7 @@
 from util import Analysis, get_api_key
 import openai
-openai.api_key = get_api_key('api_key.encrypted')
+import streamlit as st
+openai.api_key = st.secrets["openai"]["api_key"]
 
 
 class Content(Analysis):

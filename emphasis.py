@@ -3,8 +3,8 @@ import numpy as np
 import librosa
 from util import get_api_key, Analysis
 import re
-openai.api_key = get_api_key('api_key.encrypted')
-
+import streamlit as st
+openai.api_key = st.secrets["openai"]["api_key"]
 
 class Emphasis(Analysis):
     def __init__(self, audio_path, speech_type='impromptu', text=None) -> None:
