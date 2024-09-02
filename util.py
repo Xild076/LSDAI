@@ -5,6 +5,7 @@ import ssl
 import re
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
+from cryptography.fernet import Fernet
 
 ssl._create_default_https_context = ssl._create_unverified_context
 nltk.download('vader_lexicon')
@@ -18,19 +19,51 @@ def custom_round(value, threshold=0.1):
     else:
         return 0
 
+def generate_key():
+    key = Fernet.generate_key()
+    with open("secret.key", "wb") as key_file:
+        key_file.write(key)
+    return key
+
+def load_key():
+    try:
+        return open("secret.key", "rb").read()
+    except FileNotFoundError:
+        raise FileNotFoundError("Encryption key not found. Please generate a new key.")
+
+def encrypt_api_key(api_key):
+    key = load_key()
+    fernet = Fernet(key)
+    encrypted_key = fernet.encrypt(api_key.encode())
+    return encrypted_key
+
+def write_encrypted_api_key(api_key, file_path):
+    encrypted_key = encrypt_api_key(api_key)
+    
+    with open(file_path, "wb") as file:
+        file.write(encrypted_key)
+
+    print(f"API key has been encrypted and saved to {file_path}")
+
 def get_api_key(file_path):
     try:
-        with open(file_path, 'r') as file:
-            api_key = file.read().strip()
-            if not api_key:
-                raise ValueError("API key file is empty")
-            return api_key
+        with open(file_path, "rb") as file:
+            encrypted_key = file.read()
+
+        if not encrypted_key:
+            raise ValueError("API key file is empty")
+
+        key = load_key()
+        fernet = Fernet(key)
+        api_key = fernet.decrypt(encrypted_key).decode()
+        return api_key
+
     except FileNotFoundError:
         raise FileNotFoundError(f"API key file not found at: {file_path}")
     except Exception as e:
         raise e
 
-openai.api_key = get_api_key('api_key.txt')
+openai.api_key = get_api_key('api_key.encrypted')
 
 def analyze_sentiment(text):
     sid = SentimentIntensityAnalyzer()

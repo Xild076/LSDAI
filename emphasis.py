@@ -3,7 +3,7 @@ import numpy as np
 import librosa
 from util import get_api_key, Analysis
 import re
-openai.api_key = get_api_key('api_key.txt')
+openai.api_key = get_api_key('api_key.encrypted')
 
 
 class Emphasis(Analysis):

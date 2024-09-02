@@ -13,7 +13,7 @@ The application requires several Python libraries and external modules, which sh
 - `content.py`: Facilitates content extraction and organization for analysis.
 - `speech.py`: Implements speech analysis, particularly focusing on the quality and clarity of spoken words.
 - `speed.py`: Provides functionality for calculating and analyzing the speed of speech.
-- `api_key.txt`: A text file containing the necessary API keys for accessing external services (Paid OpenAI Key)
+- `api_key.encrypted`: A text file containing the necessary API keys for accessing external services (Paid OpenAI Key)
 
 ## Key Features
 
@@ -27,7 +27,7 @@ The application requires several Python libraries and external modules, which sh
   
 - **Speech Clarity**: The `speech.py` module assesses the clarity of the speech, ensuring that the spoken words are easily understood.
   
-- **User Authentication**: The app includes user authentication functionality, which uses the API key from `api_key.txt` to manage access and usage.
+- **User Authentication**: The app includes user authentication functionality, which uses the API key from `api_key.encrypted` to manage access and usage.
   
 - **Persistent Data**: Data and analysis results are saved and can be revisited or updated as needed. This includes maintaining previous analysis for each user.
 
@@ -42,7 +42,7 @@ The application requires several Python libraries and external modules, which sh
 
 3. **Analysis**: Once an audio file is uploaded, the app will conduct emphasis detection, tone analysis, and speed analysis. Results are displayed in an organized manner, with the option to save or revisit previous analyses.
 
-4. **API Key Management**: Ensure that the `api_key.txt` file contains a valid API key. This key is crucial for accessing the external services used in the analysis.
+4. **API Key Management**: Ensure that the `api_key.encrypted` file contains a valid API key. This key is crucial for accessing the external services used in the analysis.
 
 #### Notes
 

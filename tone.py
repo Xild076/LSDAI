@@ -1,7 +1,7 @@
 from util import analyze_sentiment, Analysis
 import openai
 from util import get_api_key, custom_round
-openai.api_key = get_api_key('api_key.txt')
+openai.api_key = get_api_key('api_key.encrypted')
 import os
 import pandas as pd
 import librosa
