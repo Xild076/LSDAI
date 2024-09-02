@@ -6,7 +6,6 @@ import re
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import nltk
 
-# Ensure SSL context is set correctly for downloading NLTK data
 ssl._create_default_https_context = ssl._create_unverified_context
 nltk.download('vader_lexicon')
 ssl._create_default_https_context = ssl.create_default_context
@@ -31,7 +30,6 @@ def get_api_key(file_path):
     except Exception as e:
         raise e
 
-# Set the OpenAI API key
 openai.api_key = get_api_key('api_key.txt')
 
 def analyze_sentiment(text):
