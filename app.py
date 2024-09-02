@@ -197,15 +197,12 @@ def save_feedback_to_db(username, feedback, cumulative_score):
                cumulative_score))
     conn.commit()
 
-    # Clear previous feedback from session state before reloading
     if 'previous_feedback' in st.session_state:
         del st.session_state['previous_feedback']
 
-    # Load all previous feedback into session state
     load_previous_feedback(username)
 
 def load_previous_feedback(username):
-    # Ensure session state is cleared before loading
     if 'previous_feedback' not in st.session_state:
         st.session_state['previous_feedback'] = []
 
@@ -217,6 +214,7 @@ def load_previous_feedback(username):
               (username,))
     st.session_state['previous_feedback'] = c.fetchall()
 
+
 def previous_feedback_page():
     st.title("Previous Feedback")
     
@@ -227,13 +225,13 @@ def previous_feedback_page():
             st.markdown(f"### Analysis on {entry[-1]}")
             st.markdown(f"#### Cumulative Score: {entry[5]}/100")
             if entry[1]:
-                st.markdown(f"**Content Feedback**\n\n {entry[1]}\n\n")
+                st.markdown(f"**Content Feedback**\n\n{entry[1]}\n\n")
             if entry[2]:
-                st.markdown(f"**Emphasis Feedback**\n\n {entry[2]}\n\n")
+                st.markdown(f"**Emphasis Feedback**\n\n{entry[2]}\n\n")
             if entry[3]:
-                st.markdown(f"**Tone Feedback**\n\n {entry[3]}\n\n")
+                st.markdown(f"**Tone Feedback**\n\n{entry[3]}\n\n")
             if entry[4]:
-                st.markdown(f"**Speed Feedback**:\n\n WPM: {round(float(entry[4]))}\n\n")
+                st.markdown(f"**Speed Feedback**\n\nWPM: {round(float(entry[4]))}\n\n")
             st.write("---")
     else:
         st.info("No previous feedback found.")
@@ -315,7 +313,8 @@ def home_page():
             "speed_analysis": st.checkbox("Speed Analysis"),
             "file_path": file_path,
             "preset": st.selectbox("Choose a preset", ["N/A", "Impromptu", "Extempt", "Oratory"]),
-            "progress": 0
+            "progress": 0,
+            "feedback_saved": False
         }
 
     if 'analysis_config' in st.session_state:
@@ -384,7 +383,10 @@ def home_page():
                 st.markdown(feedback)
 
             cumulative_score = round(sum(scores) / len(scores))
-            save_feedback_to_db(st.session_state['username'], config['feedback'], cumulative_score)
+
+            if not config['feedback_saved']:
+                save_feedback_to_db(st.session_state['username'], config['feedback'], cumulative_score)
+                config['feedback_saved'] = True
 
             config['progress'] = 100
             progress_bar.progress(config['progress'])

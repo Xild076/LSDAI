@@ -13,7 +13,7 @@ The application requires several Python libraries and external modules, which sh
 - `content.py`: Facilitates content extraction and organization for analysis.
 - `speech.py`: Implements speech analysis, particularly focusing on the quality and clarity of spoken words.
 - `speed.py`: Provides functionality for calculating and analyzing the speed of speech.
-- `api_key.txt`: A text file containing the necessary API keys for accessing external services [oai_citation:1,api_key.txt](file-service://file-5E4uxQPy7XwCOPpBqKHWbJpl).
+- `api_key.txt`: A text file containing the necessary API keys for accessing external services (Paid OpenAI Key)
 
 ## Key Features
 
