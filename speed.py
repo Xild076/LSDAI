@@ -12,7 +12,7 @@ class Speed(Analysis):
         wpm = len(self.transcription_time_text) / (end_time - start_time) * 60
 
         def bell_score_calc(wpm):
-            div = (wpm - 125) / 20
+            div = (wpm - 150) / 30
             sech_func = (2*math.e**(div)) / (math.e**(2*div) + 1)
             return round(100 * sech_func)
         

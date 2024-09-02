@@ -2,10 +2,10 @@ import streamlit as st
 import sqlite3
 from hashlib import sha256
 import os
-from pydub import AudioSegment
 from datetime import datetime
 from speech import SpeechAnalysis
 from streamlit_echarts import st_echarts
+import ffmpeg
 
 st.set_page_config(page_title="LSDAI - Your personal AI Speech and Debate Coach")
 
@@ -287,7 +287,7 @@ def plot_cumulative_score(scores, labels):
 
 def home_page():
     st.title("Home")
-    st.write("Welcome to the home page.")
+    st.write("Welcome to the home page. Please upload a file and proceed with the analysis")
 
     uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
 
@@ -297,9 +297,16 @@ def home_page():
         file_path = os.path.join("to_analyse", f"{base_name}.wav")
 
         if "wav" not in uploaded_file.type:
-            audio = AudioSegment.from_mp3(uploaded_file)
+            def convert_mp3_to_wav(input_file, output_file):
+                try:
+                    stream = ffmpeg.input(input_file)
+                    stream = ffmpeg.output(stream, output_file)
+                    ffmpeg.run(stream)
+                    st.success(f"File uploaded and converted to WAV format. Saved as {output_file}")
+                except:
+                    st.error(f"Error: FFMPEG has raised an issue. Please convert the file to wav automatically through websites like https://cloudconvert.com/mp3-to-wav.")
             file_path = os.path.join("to_analyse", f"{base_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav")
-            audio.export(file_path, format="wav")
+            convert_mp3_to_wav(uploaded_file, file_path)
             st.success(f"File uploaded and converted to WAV format. Saved as {file_path}")
         else:
             with open(file_path, "wb") as f:
