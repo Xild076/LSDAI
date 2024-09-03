@@ -415,10 +415,15 @@ def sign_out():
 
 page_names_to_funcs = {
     "Home": home_page,
-    "Doc": doc_page,
+    "Documentation": doc_page,
     "Previous Feedback": previous_feedback_page,
     "Sign Out": sign_out
 }
+
+home_pg = st.Page(home_page, "Home")
+doc_pg = st.Page(doc_page, "Home")
+pf_pg = st.Page(previous_feedback_page, "Previous Feedback")
+so_pg = st.Page(sign_out, "Sign Out")
 
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
@@ -427,10 +432,11 @@ if not st.session_state['logged_in']:
     init_page()
 
 if st.session_state['logged_in']:
-    st.sidebar.markdown(f"### Welcome, {st.session_state['username']}")
+    nav = st.navigation([home_pg, doc_pg, pf_pg, so_pg])
     
     demo_name = st.sidebar.radio("Navigation", list(page_names_to_funcs.keys()))
     page_names_to_funcs[demo_name]()
+    nav.run()
     
 else:
     option = st.sidebar.selectbox("Select an option", ["Sign In", "Create Account"])
