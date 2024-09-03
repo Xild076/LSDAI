@@ -421,21 +421,19 @@ page_names_to_funcs = {
 }
 
 home_pg = st.Page(home_page, title="Home")
-doc_pg = st.Page(doc_page, title="Home")
+doc_pg = st.Page(doc_page, title="Documentation")
 pf_pg = st.Page(previous_feedback_page, title="Previous Feedback")
 so_pg = st.Page(sign_out, title="Sign Out")
+nav = st.navigation([home_pg, doc_pg, pf_pg, so_pg])
 
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
 
 if not st.session_state['logged_in']:
+    nav = st.navigation([home_pg, doc_pg, pf_pg, so_pg])
     init_page()
 
 if st.session_state['logged_in']:
-    nav = st.navigation([home_pg, doc_pg, pf_pg, so_pg])
-    
-    demo_name = st.sidebar.radio("Navigation", list(page_names_to_funcs.keys()))
-    page_names_to_funcs[demo_name]()
     nav.run()
     
 else:
