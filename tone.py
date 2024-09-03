@@ -14,12 +14,10 @@ import torch.optim as optim
 from torch.utils.data import Dataset, DataLoader, random_split
 from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 from sklearn.preprocessing import LabelEncoder
-import zipfile
 import numpy as np
 import pickle
 import IPython.display as ipd
 from tqdm import tqdm
-import gdown
 from IPython.display import display
 import sys
 import warnings
