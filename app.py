@@ -6,6 +6,7 @@ from datetime import datetime
 from speech import SpeechAnalysis
 from streamlit_echarts import st_echarts
 import ffmpeg
+import time
 
 st.set_page_config(page_title="LSDAI - Your personal AI Speech and Debate Coach")
 
@@ -331,6 +332,7 @@ def home_page():
             progress_bar = st.progress(config['progress'])
 
             if config['progress'] == 0:
+                time.sleep(1)
                 config['progress'] = 20
                 progress_bar.progress(config['progress'])
                 analysis = SpeechAnalysis(config['file_path'], config['preset'].lower())
