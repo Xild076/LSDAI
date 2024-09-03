@@ -202,37 +202,6 @@ def save_feedback_to_db(username, feedback, cumulative_score):
 
     load_previous_feedback(username)
 
-def inject_custom_css():
-    st.markdown("""
-        <style>
-            .main { 
-                background-color: #f0f2f6;
-                font-family: Arial, sans-serif;
-            }
-            .stButton>button {
-                background-color: #00aaff;
-                color: white;
-                border-radius: 5px;
-                font-weight: bold;
-                padding: 10px;
-                font-size: 16px;
-            }
-            .stButton>button:hover {
-                background-color: #007acc;
-                color: #f0f2f6;
-            }
-            .stProgress .st-bo {
-                background-color: #00aaff;
-            }
-            .stSidebar {
-                background-color: #ffffff;
-                border-radius: 10px;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
-inject_custom_css()
-
 def load_previous_feedback(username):
     if 'previous_feedback' not in st.session_state:
         st.session_state['previous_feedback'] = []
