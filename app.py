@@ -318,7 +318,6 @@ def plot_cumulative_score(scores, labels):
 
 def home_page():
     st.title("Home")
-    st.image("https://cdn.dribbble.com/users/1787323/screenshots/3804436/media/9f1eb31fd77c8f3fc328d287c0ef653d.gif", width=200)  # Example of a GIF
     st.write("Welcome to the home page. Please upload a file and proceed with the analysis")
 
     uploaded_file = st.file_uploader("Upload an audio file", type=["wav", "mp3"])
