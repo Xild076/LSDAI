@@ -420,10 +420,10 @@ page_names_to_funcs = {
     "Sign Out": sign_out
 }
 
-home_pg = st.Page(home_page, "Home")
-doc_pg = st.Page(doc_page, "Home")
-pf_pg = st.Page(previous_feedback_page, "Previous Feedback")
-so_pg = st.Page(sign_out, "Sign Out")
+home_pg = st.Page(home_page, title="Home")
+doc_pg = st.Page(doc_page, title="Home")
+pf_pg = st.Page(previous_feedback_page, title="Previous Feedback")
+so_pg = st.Page(sign_out, title="Sign Out")
 
 if 'logged_in' not in st.session_state:
     st.session_state['logged_in'] = False
