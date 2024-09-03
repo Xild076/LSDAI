@@ -345,6 +345,7 @@ def home_page():
                 )
                 config.update(feedback=feedback, analysis_config=analysis_config)
                 config['progress'] = 60
+                progress_bar.progress(config['progress'])
 
             scores = []
             labels = []
@@ -354,23 +355,31 @@ def home_page():
                 labels.append("Content")
                 scores.append(config['feedback']['content'][1])
                 feedback_text.append(f"### Content Feedback\n {config['feedback']['content'][0]}\n\n #### Score: {round(config['feedback']['content'][1])}/100")
+                config['progress'] += 5
+                progress_bar.progress(config['progress'])
             
             if config.get('analysis_config', [])[1] == 1:
                 labels.append("Emphasis")
                 scores.append(config['feedback']['emphasis'][2])
                 feedback_text.append(f"### Emphasis Feedback\n\n #### Emphasized Text\n {config['feedback']['emphasis'][0]}\n\n #### Feedback\n {config['feedback']['emphasis'][1]}\n\n #### Score: {round(config['feedback']['emphasis'][2])}/100")
+                config['progress'] += 5
+                progress_bar.progress(config['progress'])
             
             if config.get('analysis_config', [])[2] == 1:
                 labels.append("Tone")
                 scores.append(config['feedback']['tone'][2])
                 feedback_text.append(f"### Tone Feedback\n\n #### Determined Tonal Usage\n {config['feedback']['tone'][0]}\n\n #### Feedback\n {config['feedback']['tone'][1]}\n\n #### Score: {round(config['feedback']['tone'][2])}/100".replace("$", "S"))
+                config['progress'] += 5
+                progress_bar.progress(config['progress'])
             
             if config.get('analysis_config', [])[3] == 1:
                 labels.append("Speed")
                 scores.append(config['feedback']['speed'][1])
                 feedback_text.append(f"### Speed Feedback\n\n #### Words per minute: {round(config['feedback']['speed'][0])} \n\n #### Score: {round(config['feedback']['speed'][1])}/100")
+                config['progress'] += 5
+                progress_bar.progress(config['progress'])
 
-            config['progress'] = 80
+            config['progress'] = 90
             progress_bar.progress(config['progress'])
 
             col1, col2 = st.columns([1, 1])
