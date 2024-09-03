@@ -63,10 +63,10 @@ class Emphasis(Analysis):
 
         for word_info in loud_words:
             word = re.escape(word_info[0])
-            emphasized_text = re.sub(rf'\b{word}\b', f"***{word_info[0]}***", emphasized_text)
+            emphasized_text = re.sub(rf'\b{word}\b', f"_{word_info[0]}_", emphasized_text)
             emphasized_text = emphasized_text.replace('$', 'S')
 
-        emphasized_text = re.sub(r'***( ***)+***', '***', emphasized_text)
+        emphasized_text = re.sub(r'_( _)+_', '_', emphasized_text)
         
         return emphasized_text.strip()
     
