@@ -185,60 +185,6 @@ def init_page():
     st.title("LSD AI - Your personal AI Speech and Debate Coach")
     st.write(intro)
 
-def inject_custom_css():
-    st.markdown("""
-        <style>
-            /* Rolling Gradient Background for Specific Sections */
-            .gradient-text {
-                background: linear-gradient(90deg, #ff6ec4, #f9d423, #ff4b2b);
-                background-size: 200% 200%;
-                color: transparent;
-                -webkit-background-clip: text;
-                animation: gradientAnimation 5s ease infinite;
-                font-weight: bold;
-            }
-
-            @keyframes gradientAnimation {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
-
-            /* Simple text animations */
-            .fade-in {
-                animation: fadeInAnimation 2s ease-in;
-            }
-
-            @keyframes fadeInAnimation {
-                0% { opacity: 0; }
-                100% { opacity: 1; }
-            }
-
-            /* Button Styling */
-            .stButton>button {
-                background-color: #ff6ec4;
-                color: white;
-                border-radius: 5px;
-                padding: 10px;
-                font-size: 16px;
-                font-weight: bold;
-                transition: background-color 0.3s ease;
-            }
-
-            .stButton>button:hover {
-                background-color: #ff4b2b;
-            }
-
-            /* Sidebar Styling */
-            .stSidebar {
-                background-color: #f9d423;
-                border-radius: 10px;
-            }
-        </style>
-    """, unsafe_allow_html=True)
-
-inject_custom_css()
-
 def save_feedback_to_db(username, feedback, cumulative_score):
     c.execute('''INSERT INTO feedback (username, content_feedback, emphasis_feedback, 
                 tone_feedback, speed_feedback, cumulative_score) 
