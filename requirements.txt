@@ -12,3 +12,4 @@ streamlit_echarts
 nltk
 tqdm
 cryptography
+soundfile
