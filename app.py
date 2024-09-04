@@ -303,11 +303,11 @@ def home_page():
                 try:
                     y, sr = librosa.load(input_file, sr=None)
                     sf.write(output_file, y, sr)
-                    st.success(f"File uploaded and converted to WAV format. Saved as {output_file}")
                 except Exception as e:
                     st.error(f"Error during conversion: {str(e)}. Please convert the file to WAV manually.")
             file_path = os.path.join("to_analyse", f"{base_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav")
-            convert_mp3_to_wav(uploaded_file, file_path)
+            with st.spinner('Converting file to WAV format... Please wait.'):
+                convert_mp3_to_wav(uploaded_file, file_path)
             st.success(f"File uploaded and converted to WAV format. Saved as {file_path}")
         else:
             with open(file_path, "wb") as f:
