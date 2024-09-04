@@ -37,7 +37,7 @@ class Emphasis(Analysis):
         
         return word_features
 
-    def find_loud_words(self, words_timestamps, relative_window_percentage=0.1, loud_threshold_factor=1.5):
+    def find_loud_words(self, words_timestamps, relative_window_percentage=0.1, loud_threshold_factor=1.3, pitch_threshold=1.1):
         word_features = self.calculate_word_features(self.audio_path, words_timestamps)
         total_words = len(word_features)
         window_size = max(1, int(total_words * relative_window_percentage))
@@ -55,8 +55,9 @@ class Emphasis(Analysis):
                 avg_surrounding_volume = np.mean(surrounding_volumes)
                 avg_surrounding_pitch = np.mean(surrounding_pitches)
 
-                if (word_features[i]['volume'] > avg_surrounding_volume * loud_threshold_factor and
-                    word_features[i]['pitch'] > avg_surrounding_pitch * 1.2):
+                if (word_features[i]['volume'] > avg_surrounding_volume * loud_threshold_factor or
+                    word_features[i]['volume'] > global_avg_volume * loud_threshold_factor) and \
+                    word_features[i]['pitch'] > avg_surrounding_pitch * pitch_threshold:
                     loud_words.append((word_info['word'], word_info['start'], word_info['end']))
         
         return loud_words
@@ -67,10 +68,10 @@ class Emphasis(Analysis):
 
         for word_info in loud_words:
             word = re.escape(word_info[0])
-            emphasized_text = re.sub(rf'\b{word}\b', f"_{word_info[0]}_", emphasized_text)
+            emphasized_text = re.sub(rf'\b{word}\b', f"***{word_info[0]}***", emphasized_text)
             emphasized_text = emphasized_text.replace('$', 'S')
 
-        emphasized_text = re.sub(r'_( _)+_', '_', emphasized_text)
+        emphasized_text = re.sub(r'\*\*\*( \*\*\*)+', '***', emphasized_text)
         
         return emphasized_text.strip()
 
@@ -107,4 +108,4 @@ class Emphasis(Analysis):
                 pass
         return emph_text, proper_response, score
 
-print("Improved Emphasis Class Loaded")
+print("Emphasis Class Loaded")
