@@ -12,6 +12,9 @@ import time
 st.set_page_config(page_title="LSDAI - Your personal AI Speech and Debate Coach")
 
 documentation = """
+
+Made by Xild (Harry Yin)
+
 ## Overview
 
 The LSDAI serves as the main entry point for a Streamlit application designed to perform advanced audio analysis tasks, including emphasis detection, tone analysis, and speech speed evaluation. This application leverages multiple Python modules and files to deliver a comprehensive analysis of audio files.
@@ -27,7 +30,7 @@ The application requires several Python libraries and external modules, which sh
 - `content.py`: Facilitates content extraction and organization for analysis.
 - `speech.py`: Implements speech analysis, particularly focusing on the quality and clarity of spoken words.
 - `speed.py`: Provides functionality for calculating and analyzing the speed of speech.
-- `api_key.encrypted`: A text file containing the necessary API keys for accessing external services [oai_citation:1,api_key.encrypted](file-service://file-5E4uxQPy7XwCOPpBqKHWbJpl).
+- `api_key.encrypted`: A text file containing the necessary API keys for accessing external services.
 
 ## Key Features
 
@@ -77,6 +80,8 @@ The application requires several Python libraries and external modules, which sh
 """
 
 intro = """
+
+#### LSDAI - Made by Xild (Harry Yin)
 
 The `LSDAI` script is the heart of a cutting-edge audio analysis application, designed to offer deep insights into spoken content. By integrating multiple specialized Python modules, this application provides users with the ability to scrutinize audio files in ways that go far beyond basic transcription. Whether you're a linguist, a speech coach, a content creator, or anyone interested in audio analysis, this tool equips you with the ability to understand the nuances of speech with precision and clarity.
 
