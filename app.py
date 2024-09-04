@@ -5,7 +5,8 @@ import os
 from datetime import datetime
 from speech import SpeechAnalysis
 from streamlit_echarts import st_echarts
-import ffmpeg
+import librosa
+import soundfile as sf
 import time
 
 st.set_page_config(page_title="LSDAI - Your personal AI Speech and Debate Coach")
@@ -300,12 +301,11 @@ def home_page():
         if "wav" not in uploaded_file.type:
             def convert_mp3_to_wav(input_file, output_file):
                 try:
-                    stream = ffmpeg.input(input_file)
-                    stream = ffmpeg.output(stream, output_file)
-                    ffmpeg.run(stream)
+                    y, sr = librosa.load(input_file, sr=None)
+                    sf.write(output_file, y, sr)
                     st.success(f"File uploaded and converted to WAV format. Saved as {output_file}")
-                except:
-                    st.error(f"Error: FFMPEG has raised an issue. Please convert the file to wav automatically through websites like https://cloudconvert.com/mp3-to-wav.")
+                except Exception as e:
+                    st.error(f"Error during conversion: {str(e)}. Please convert the file to WAV manually.")
             file_path = os.path.join("to_analyse", f"{base_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.wav")
             convert_mp3_to_wav(uploaded_file, file_path)
             st.success(f"File uploaded and converted to WAV format. Saved as {file_path}")
