@@ -221,7 +221,6 @@ def load_previous_feedback(username):
               (username,))
     st.session_state['previous_feedback'] = c.fetchall()
 
-
 def previous_feedback_page():
     st.title("Previous Feedback")
     
