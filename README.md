@@ -2,6 +2,10 @@
 
 The LSDAI serves as the main entry point for a Streamlit application designed to perform advanced audio analysis tasks, including emphasis detection, tone analysis, and speech speed evaluation. This application leverages multiple Python modules and files to deliver a comprehensive analysis of audio files.
 
+## Warnings
+
+Currently, the application is running off of a personal API key. The usage of external API keys will be implemented in the future.
+
 ## Dependencies
 
 The application requires several Python libraries and external modules, which should be installed before running the app:
