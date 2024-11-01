@@ -62,7 +62,7 @@ def sign_in():
             st.session_state['username'] = username
             load_previous_feedback(username)
             st.sidebar.success(f"Signed in as {username}")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.sidebar.error("Invalid username or password")
 
@@ -391,7 +391,7 @@ def doc_page():
 def sign_out():
     st.session_state.clear()
     st.sidebar.success("You have signed out")
-    st.experimental_rerun()
+    st.rerun()
 
 page_names_to_funcs = {
     "Home": home_page,
