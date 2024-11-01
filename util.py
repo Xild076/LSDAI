@@ -147,8 +147,8 @@ class Analysis:
                 full_transcription_text += chunk_text + " "
                 
                 for word in words:
-                    word['start'] += cumulative_time_offset
-                    word['end'] += cumulative_time_offset
+                    word.start += cumulative_time_offset
+                    word.end += cumulative_time_offset
 
                 chunk_duration = AudioSegment.from_file(audio_file).duration_seconds
                 cumulative_time_offset += chunk_duration
