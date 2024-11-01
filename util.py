@@ -147,7 +147,6 @@ class Analysis:
                 full_transcription_text += chunk_text + " "
                 
                 for word in words:
-                    print(word)
                     word['start'] += cumulative_time_offset
                     word['end'] += cumulative_time_offset
 
@@ -167,16 +166,16 @@ class Analysis:
                     sentence_text = ''
 
                     for word_info in words[current_index:]:
-                        word = word_info['word']
+                        word = word_info.word
                         
                         if matched_words == 0:
-                            sentence_start_time = word_info['start']
+                            sentence_start_time = word_info.start
                         
                         sentence_text += ' ' + word
                         matched_words += 1
                         
                         if matched_words == sentence_length:
-                            sentence_end_time = word_info['end']
+                            sentence_end_time = word_info.end
                             current_index += matched_words
                             break
                     
