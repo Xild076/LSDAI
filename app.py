@@ -9,6 +9,115 @@ import librosa
 import soundfile as sf
 import time
 
+
+
+
+documentation = """
+
+Made by Xild (Harry Yin)
+
+## Overview
+
+The LSDAI serves as the main entry point for a Streamlit application designed to perform advanced audio analysis tasks, including emphasis detection, tone analysis, and speech speed evaluation. This application leverages multiple Python modules and files to deliver a comprehensive analysis of audio files.
+
+## Dependencies
+
+The application requires several Python libraries and external modules, which should be installed before running the app:
+
+- `streamlit`: For building the web interface.
+- `emphasis.py`: Handles the detection of emphasized words or phrases in the audio.
+- `tone.py`: Manages the tone analysis functionality, providing insights into the emotional content of speech.
+- `util.py`: Contains utility functions that support the main analysis, such as file handling and formatting.
+- `content.py`: Facilitates content extraction and organization for analysis.
+- `speech.py`: Implements speech analysis, particularly focusing on the quality and clarity of spoken words.
+- `speed.py`: Provides functionality for calculating and analyzing the speed of speech.
+- `api_key.encrypted`: A text file containing the necessary API keys for accessing external services.
+
+## Key Features
+
+- **Audio File Upload**: Users can upload audio files of various formats. The app processes these files and conducts multiple forms of analysis.
+  
+- **Emphasis Detection**: The `emphasis.py` module is used to detect and highlight emphasized words or phrases within the audio, making it easier to identify key points or stressed content.
+  
+- **Tone Analysis**: The `tone.py` module provides a detailed analysis of the tone used in the speech, helping to discern emotional undertones or intentions.
+  
+- **Speech Speed Analysis**: The `speed.py` module measures the speed of speech, which can be an indicator of various factors such as nervousness or excitement.
+  
+- **Speech Clarity**: The `speech.py` module assesses the clarity of the speech, ensuring that the spoken words are easily understood.
+  
+- **User Authentication**: The app includes user authentication functionality, which uses the API key from `api_key.encrypted` to manage access and usage.
+  
+- **Persistent Data**: Data and analysis results are saved and can be revisited or updated as needed. This includes maintaining previous analysis for each user.
+
+## Usage
+
+1. **Running the App**: To run the app, use the Streamlit command:
+   ```bash
+   streamlit run app.py
+   ```
+
+2. **Uploading Audio Files**: Users can upload audio files directly through the app's interface. The app will automatically process these files and display results.
+
+3. **Analysis**: Once an audio file is uploaded, the app will conduct emphasis detection, tone analysis, and speed analysis. Results are displayed in an organized manner, with the option to save or revisit previous analyses.
+
+4. **API Key Management**: Ensure that the `api_key.encrypted` file contains a valid API key. This key is crucial for accessing the external services used in the analysis.
+
+#### Notes
+
+- **File Size Limitations**: There may be size limitations on the audio files that can be uploaded, depending on the configuration of the Streamlit server and the underlying infrastructure.
+  
+- **Customizations**: The app is modular, allowing for easy customization. Developers can add additional analysis modules or modify existing ones by editing the corresponding `.py` files.
+
+- **Error Handling**: Basic error handling is implemented, but users should ensure that the audio files are properly formatted and that all dependencies are installed correctly.
+
+## Future Enhancements
+
+- **Improved GUI**: Plans to enhance the graphical interface, including animations and dynamic updates, are under consideration.
+  
+- **Expanded Analysis**: Additional forms of analysis, such as sentiment analysis or linguistic complexity, may be integrated into future versions.
+
+- **Multi-User Support**: Expanding the app's capabilities to support multiple users with separate accounts and analysis histories.
+
+"""
+
+intro = """
+
+#### LSDAI - Made by Xild (Harry Yin)
+
+The `LSDAI` script is the heart of a cutting-edge audio analysis application, designed to offer deep insights into spoken content. By integrating multiple specialized Python modules, this application provides users with the ability to scrutinize audio files in ways that go far beyond basic transcription. Whether you're a linguist, a speech coach, a content creator, or anyone interested in audio analysis, this tool equips you with the ability to understand the nuances of speech with precision and clarity.
+
+The application supports a variety of analysis types, including emphasis detection, which identifies the most stressed words or phrases in speech, tone analysis, which deciphers the emotional undertones, and speech speed analysis, which evaluates the pacing of the spoken content. This comprehensive suite of tools ensures that you can get the most out of your audio data, allowing for detailed feedback and insights that can be critical in both professional and personal contexts.
+
+In addition, the application is designed with user convenience in mind. It allows for easy file uploads, intuitive interaction, and ensures that your data is saved and easily accessible for future reference. The modular design also means that the application can be easily expanded or customized to meet specific needs, making it a versatile choice for any audio analysis task.
+
+### Unleash the Power of Speech Analysis with Our Revolutionary Audio Analysis App!
+
+Are you ready to take your audio analysis to the next level? Our app is not just another speech-to-text tool—it's a full-fledged audio analysis powerhouse that gives you unprecedented control and insight into your spoken content. Whether you're analyzing interviews, podcasts, speeches, or any other form of verbal communication, this app empowers you to dive deeper into the details that matter most.
+
+**Why settle for less when you can have it all?** Our app's advanced features make it an indispensable tool for anyone looking to understand and refine speech. From detecting emphasized words that carry the most weight to analyzing the emotional tone of speech and assessing the speed and clarity of delivery, our app has you covered.
+
+With a sleek and user-friendly interface, it's never been easier to upload your audio files, perform in-depth analyses, and revisit your results whenever you need them. Plus, with our state-of-the-art technology, you can trust that your insights are both accurate and actionable.
+
+### Key Features
+
+- **Emphasis Detection**: Automatically identify and highlight the most stressed words or phrases in your audio, helping you pinpoint key messages and emotions.
+
+- **Tone Analysis**: Understand the emotional undertones of speech with detailed tone analysis, giving you a clearer picture of the speaker's intent.
+
+- **Speech Speed Analysis**: Measure and analyze the speed of speech to evaluate pacing, an essential factor in communication effectiveness.
+
+- **Speech Clarity Evaluation**: Assess the clarity of spoken words, ensuring that your message is both clear and comprehensible.
+
+- **User Authentication and Data Persistence**: Securely manage your analysis with user authentication and save your data for easy access and review.
+
+- **Modular and Customizable Design**: Tailor the app to your specific needs by easily adding or modifying analysis modules.
+
+- **Streamlined User Interface**: Enjoy a seamless experience with a sleek, intuitive interface designed for easy navigation and use.
+
+Don't just analyze—**dominate** the world of audio with our all-in-one solution. Your speech deserves the best, and with our app, that's exactly what you'll get."""
+
+
+
 st.set_page_config(page_title="LSDAI - Your personal AI Speech and Debate Coach", layout="wide")
 
 os.makedirs("web_management", exist_ok=True)
@@ -87,6 +196,7 @@ def create_account():
 
 def init_page():
     st.title("LSDAI - Your personal AI Speech and Debate Coach")
+    st.write(intro)
 
 def save_feedback_to_db(username, feedback, cumulative_score):
     c.execute('''INSERT INTO feedback (username, content_feedback, emphasis_feedback, 
@@ -280,7 +390,7 @@ def home_page():
 
 def doc_page():
     st.title("Documentation")
-    st.write("Documentation content has been removed.")
+    st.write(documentation)
 
 def sign_out():
     st.session_state.clear()
