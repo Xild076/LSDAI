@@ -64,7 +64,11 @@ def get_api_key(file_path):
         raise e
 
 import streamlit as st
-openai.api_key = st.secrets["openai"]["api_key"]
+try:
+    openai.api_key = st.secrets["openai"]["api_key"]
+except:
+    openai.api_key = get_api_key('api_key.encrypted')
+
 
 def analyze_sentiment(text):
     sid = SentimentIntensityAnalyzer()
@@ -143,6 +147,7 @@ class Analysis:
                 full_transcription_text += chunk_text + " "
                 
                 for word in words:
+                    print(word)
                     word['start'] += cumulative_time_offset
                     word['end'] += cumulative_time_offset
 

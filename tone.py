@@ -2,7 +2,10 @@ from util import analyze_sentiment, Analysis
 import openai
 import streamlit as st
 from util import get_api_key, custom_round
-openai.api_key = st.secrets["openai"]["api_key"]
+try:
+    openai.api_key = st.secrets["openai"]["api_key"]
+except:
+    openai.api_key = get_api_key('api_key.encrypted')
 import os
 import pandas as pd
 import librosa

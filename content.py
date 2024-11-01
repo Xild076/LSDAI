@@ -1,8 +1,11 @@
 from util import Analysis, get_api_key
 import openai
 import streamlit as st
-openai.api_key = st.secrets["openai"]["api_key"]
 
+try:
+    openai.api_key = st.secrets["openai"]["api_key"]
+except:
+    openai.api_key = get_api_key('api_key.encrypted')
 
 class Content(Analysis):
     def __init__(self, audio_path, speech_type='impromptu', text=None) -> None:
