@@ -20,8 +20,8 @@ class Emphasis(Analysis):
         
         word_features = []
         for word_info in words_timestamps:
-            word_start = word_info['start']
-            word_end = word_info['end']
+            word_start = word_info.start
+            word_end = word_info.end
             start_sample = librosa.time_to_samples(word_start, sr=sr)
             end_sample = librosa.time_to_samples(word_end, sr=sr)
             word_audio = y[start_sample:end_sample]
@@ -62,7 +62,7 @@ class Emphasis(Analysis):
                 if (word_features[i]['volume'] > avg_surrounding_volume * loud_threshold_factor or
                     word_features[i]['volume'] > global_avg_volume * loud_threshold_factor) and \
                     word_features[i]['pitch'] > avg_surrounding_pitch * pitch_threshold:
-                    loud_words.append((word_info['word'], word_info['start'], word_info['end']))
+                    loud_words.append((word_info.word, word_info.start, word_info.end))
         
         return loud_words
 
@@ -108,7 +108,8 @@ class Emphasis(Analysis):
                 proper_response = ' '.join(part_response[:(len(part_response) - 2)])
                 score = int(part_response[-1])
                 break
-            except:
+            except Exception as e:
+                print(e)
                 pass
         return emph_text, proper_response, score
 
